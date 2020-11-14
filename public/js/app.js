@@ -1981,7 +1981,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Nav"
+  name: "Nav",
+  data: function data() {
+    return {
+      user: null
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/auth-user').then(function (res) {
+      _this.user = res.data;
+    })["catch"](function (error) {
+      console.log('Unable to fetch auth user');
+    });
+  }
 });
 
 /***/ }),
@@ -20019,24 +20033,26 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass:
-                "px-6 border-b-2 border-white h-full flex items-center ",
-              attrs: { to: "/" }
-            },
-            [
-              _c("img", {
-                staticClass: "w-8 h-8 object-cover rounded-full",
-                attrs: {
-                  src:
-                    "https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg",
-                  alt: "profile image for user"
-                }
-              })
-            ]
-          ),
+          _vm.user
+            ? _c(
+                "router-link",
+                {
+                  staticClass:
+                    "px-6 border-b-2 border-white h-full flex items-center ",
+                  attrs: { to: "/users/" + _vm.user.data.user_id }
+                },
+                [
+                  _c("img", {
+                    staticClass: "w-8 h-8 object-cover rounded-full",
+                    attrs: {
+                      src:
+                        "https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg",
+                      alt: "profile image for user"
+                    }
+                  })
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "router-link",
