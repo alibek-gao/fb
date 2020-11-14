@@ -1,6 +1,7 @@
 <template>
     <div class="flex flex-col items-center">
-        <div class="relative mb-8">
+        <p v-if="userLoading">Loading posts...</p>
+        <div v-else class="relative mb-8">
             <div class="w-100 h-64 overflow-hidden z-10">
                 <img src="https://cdn.pixabay.com/photo/2017/03/26/12/13/countryside-2175353_960_720.jpg" alt="user background image" class="object-cover w-full">
             </div>
